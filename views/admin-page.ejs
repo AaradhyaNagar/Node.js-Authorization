@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secured URL Shortener Dashboard</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <div class="outerContainer">
+      <h1>Complete Analytics</h1>
+      <% if (locals.urls) { %>
+      <table>
+        <thead>
+          <tr>
+            <th>S. No</th>
+            <th>ShortId</th>
+            <th>Redirect</th>
+            <th>Clicks</th>
+            <th class="centerAlign">Created By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% locals.urls.forEach((url, index) => { %>
+          <tr>
+            <td class="centerAlign"><%= index + 1 %></td>
+            <td><%= url.shortId %></td>
+            <td class="truncate "><%= url.redirectURL %></td>
+            <td class="centerAlign"><%= url.visitHistory.length %></td>
+            <td class="truncate"><%= url.createdBy ? url.createdBy.email : 'N/A' %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+      <div class="container">
+        <form method="GET" action="/">
+          <button class="backToHome" type="submit">Back to Home</button>
+        </form>
+        <form method="GET" action="/logout">
+          <button class="logOut" type="submit">Log Out</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
